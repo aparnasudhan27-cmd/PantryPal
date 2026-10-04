@@ -1,37 +1,41 @@
-/* Reset */
+/* =========================================
+   GENERAL
+========================================= */
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #fffaf2;
+    background: #f8f8f8;
     color: #333;
 }
 
 
-/* Navigation Bar */
+/* =========================================
+   NAVIGATION BAR
+========================================= */
+
 .navbar {
-    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 8%;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 18px 8%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .logo {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: bold;
-    color: #e76f00;
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 25px;
 }
 
 .nav-links a {
@@ -41,183 +45,294 @@ body {
 }
 
 .nav-links a:hover {
-    color: #e76f00;
+    color: #6a1b9a;
 }
 
 
-/* Hero Section */
-.hero {
-    min-height: 430px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 50px 20px;
+/* =========================================
+   HERO SECTION
+========================================= */
 
-    background: linear-gradient(
-        135deg,
-        #fff3d6,
-        #ffe4c4
-    );
+.hero {
+    padding: 70px 20px;
+    text-align: center;
+    background: #f3e5f5;
 }
 
 .hero-content {
-    max-width: 700px;
+    max-width: 800px;
+    margin: auto;
 }
 
 .hero h1 {
-    font-size: 52px;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 42px;
+    margin-bottom: 15px;
 }
 
 .hero p {
-    font-size: 19px;
-    color: #666;
+    font-size: 18px;
     margin-bottom: 30px;
+    color: #555;
 }
 
 
-/* Ingredient Search */
+/* =========================================
+   INGREDIENT INPUT
+========================================= */
+
 .ingredient-box {
     display: flex;
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .ingredient-box input {
-    width: 350px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    width: 300px;
+    padding: 13px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
     outline: none;
 }
 
 .ingredient-box input:focus {
-    border-color: #e76f00;
+    border-color: #6a1b9a;
 }
 
 .ingredient-box button {
-    padding: 15px 25px;
+    padding: 13px 20px;
     border: none;
-    border-radius: 10px;
-    background-color: #e76f00;
+    border-radius: 8px;
+    background: #6a1b9a;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .ingredient-box button:hover {
-    background-color: #c95f00;
+    opacity: 0.9;
 }
 
 
-/* Popular Recipes */
-.popular {
-    padding: 50px 8%;
-}
+/* =========================================
+   SELECTED INGREDIENT CHIPS
+========================================= */
 
-.popular h2 {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 35px;
-}
-
-.recipe-container {
+.ingredient-list {
     display: flex;
     justify-content: center;
-    gap: 25px;
     flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-
-/* Recipe Card */
-.recipe-card {
-    width: 260px;
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-.recipe-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.food-image {
-    height: 150px;
-    display: flex;
-    justify-content: center;
+.ingredient-chip {
+    display: inline-flex;
     align-items: center;
-    background-color: #fff0d9;
-    font-size: 70px;
+    gap: 8px;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #6a1b9a;
+    border-radius: 20px;
+    color: #6a1b9a;
+    font-size: 14px;
 }
 
-.recipe-card h3 {
-    margin-top: 18px;
-    margin-bottom: 8px;
-}
-
-.recipe-card p {
-    color: #777;
-}
-
-
-/* Mobile */
-@media (max-width: 700px) {
-
-    .navbar {
-        padding: 0 5%;
-    }
-
-    .nav-links {
-        gap: 12px;
-    }
-
-    .hero h1 {
-        font-size: 38px;
-    }
-
-    .ingredient-box {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .ingredient-box input {
-        width: 90%;
-    }
-
-    .ingredient-box button {
-        width: 90%;
-    }
-}
-.view-button {
-    margin-top: 15px;
-    padding: 10px 18px;
+.ingredient-chip button {
     border: none;
-    border-radius: 8px;
-    background-color: #e76f00;
+    background: none;
+    color: #6a1b9a;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+/* =========================================
+   CLEAR BUTTON
+========================================= */
+
+.clear-button {
+    margin-top: 15px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 7px;
+    background: #777;
     color: white;
     cursor: pointer;
 }
 
-.view-button:hover {
-    background-color: #c95f00;
+.clear-button:hover {
+    background: #555;
 }
 
-.no-results {
-    text-align: center;
-    font-size: 18px;
-    color: #777;
-    width: 100%;
+
+/* =========================================
+   RECIPE SECTION
+========================================= */
+
+.recipes-section {
+    padding: 50px 8%;
 }
-/* Recipe Popup */
+
+.recipes-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+
+/* =========================================
+   RECIPE CONTAINER
+========================================= */
+
+.recipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+
+/* =========================================
+   DYNAMIC RECIPE CARD
+========================================= */
+
+.recipe-card {
+    position: relative;
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.food-image {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3e5f5;
+    border-radius: 12px;
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.recipe-card h3 {
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.recipe-card p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   CATEGORY BADGE
+========================================= */
+
+.category-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background: #eee;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   MATCH PERCENTAGE
+========================================= */
+
+.match-percentage {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 5px 9px;
+    border-radius: 15px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   VIEW RECIPE BUTTON
+========================================= */
+
+.view-button {
+    margin-top: 12px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 7px;
+    background: #6a1b9a;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.view-button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   RECIPE SEARCH & FILTER
+========================================= */
+
+.recipe-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.recipe-controls input,
+.recipe-controls select {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.recipe-controls input {
+    width: 280px;
+}
+
+.recipe-controls input:focus,
+.recipe-controls select:focus {
+    border-color: #6a1b9a;
+}
+
+
+/* =========================================
+   RECIPE MODAL / POPUP
+========================================= */
 
 .modal {
     display: none;
@@ -227,42 +342,37 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-
-    background-color: rgba(0, 0, 0, 0.5);
-
+    background: rgba(0, 0, 0, 0.55);
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .modal-content {
     position: relative;
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
     overflow-y: auto;
-
-    background-color: white;
-    border-radius: 20px;
-    padding: 35px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
 
 .close-button {
     position: absolute;
-    right: 20px;
-    top: 15px;
-
+    right: 15px;
+    top: 12px;
     border: none;
     background: none;
-
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
     color: #555;
 }
 
 .close-button:hover {
-    color: #e76f00;
+    color: #000;
 }
 
 .modal-emoji {
@@ -276,83 +386,88 @@ body {
     margin-bottom: 10px;
 }
 
-.modal-content h3 {
-    margin-top: 25px;
-    margin-bottom: 10px;
-    color: #e76f00;
-}
-
-.modal-content p {
+#modalTime {
+    text-align: center;
     color: #666;
-    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.modal-content li {
-    margin-bottom: 8px;
-}
-.ingredient-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+.modal-content h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-.ingredient-chip {
-    background-color: #fff;
-    border: 1px solid #e76f00;
-    color: #e76f00;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 14px;
+#modalIngredients {
+    padding-left: 25px;
+    line-height: 1.8;
 }
 
-.ingredient-chip button {
-    border: none;
-    background: none;
-    color: #e76f00;
-    font-size: 16px;
-    cursor: pointer;
-    margin-left: 5px;
-}
-.category-badge {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 5px 12px;
-    border-radius: 15px;
-    background-color: #fff0d9;
-    color: #e76f00;
-    font-size: 13px;
-    font-weight: bold;
-}
-.clear-button {
-    display: block;
-    margin: 15px auto;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #eee;
+#modalSteps {
+    line-height: 1.7;
     color: #555;
-    cursor: pointer;
 }
 
-.clear-button:hover {
-    background-color: #ddd;
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .ingredient-box {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ingredient-box input {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .ingredient-box button {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .recipe-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        padding: 25px 20px;
+    }
 }
-/* Add Recipe Page */
+
+
+/* =========================================
+   ADD RECIPE FORM
+========================================= */
 
 .add-recipe {
-    max-width: 600px;
+    max-width: 650px;
     margin: 50px auto;
     padding: 30px;
-    background-color: white;
+    background: white;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .add-recipe h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .add-recipe form {
@@ -362,8 +477,8 @@ body {
 }
 
 .add-recipe label {
-    font-weight: bold;
-    margin-top: 10px;
+    font-weight: 600;
+    margin-top: 8px;
 }
 
 .add-recipe input,
@@ -371,10 +486,10 @@ body {
 .add-recipe textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-    font-family: Arial, sans-serif;
+    font-family: inherit;
 }
 
 .add-recipe textarea {
@@ -382,17 +497,22 @@ body {
 }
 
 .add-recipe button {
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 13px;
     border: none;
     border-radius: 8px;
-    background-color: #e76f00;
+    background: #6a1b9a;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .add-recipe button:hover {
-    background-color: #c95f00;
+    opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+    .add-recipe {
+        margin: 30px 20px;
+    }
 }
