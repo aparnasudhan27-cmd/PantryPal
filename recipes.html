@@ -1,4 +1,3 @@
-<html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,110 +27,78 @@
 
 
     <!-- Recipes Section -->
-    <section class="popular">
+    <section class="recipes-section">
 
         <h2>All Recipes 🍴</h2>
 
-        <div class="recipe-container">
+        <!-- Search and Filter -->
+        <div class="recipe-controls">
 
-            <div class="recipe-card">
-                <div class="food-image">🍳</div>
-                <h3>Egg Fried Rice</h3>
-                <p>⏱ 15 mins</p>
-                <span class="category-badge">Lunch</span>
-            </div>
+            <input
+                type="text"
+                id="recipeSearch"
+                placeholder="Search recipes or ingredients..."
+                oninput="searchRecipes()"
+            >
 
-
-            <div class="recipe-card">
-                <div class="food-image">🍝</div>
-                <h3>Tomato Pasta</h3>
-                <p>⏱ 20 mins</p>
-                <span class="category-badge">Lunch</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍞</div>
-                <h3>French Toast</h3>
-                <p>⏱ 10 mins</p>
-                <span class="category-badge">Breakfast</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍋</div>
-                <h3>Lemon Rice</h3>
-                <p>⏱ 15 mins</p>
-                <span class="category-badge">Lunch</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍳</div>
-                <h3>Omelette</h3>
-                <p>⏱ 10 mins</p>
-                <span class="category-badge">Breakfast</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🥪</div>
-                <h3>Vegetable Sandwich</h3>
-                <p>⏱ 10 mins</p>
-                <span class="category-badge">Snacks</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🥞</div>
-                <h3>Pancakes</h3>
-                <p>⏱ 20 mins</p>
-                <span class="category-badge">Breakfast</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍌</div>
-                <h3>Banana Smoothie</h3>
-                <p>⏱ 5 mins</p>
-                <span class="category-badge">Drinks</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🥔</div>
-                <h3>Potato Fry</h3>
-                <p>⏱ 20 mins</p>
-                <span class="category-badge">Snacks</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍚</div>
-                <h3>Vegetable Fried Rice</h3>
-                <p>⏱ 20 mins</p>
-                <span class="category-badge">Lunch</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍕</div>
-                <h3>Bread Pizza</h3>
-                <p>⏱ 15 mins</p>
-                <span class="category-badge">Snacks</span>
-            </div>
-
-
-            <div class="recipe-card">
-                <div class="food-image">🍅</div>
-                <h3>Tomato Soup</h3>
-                <p>⏱ 25 mins</p>
-                <span class="category-badge">Dinner</span>
-            </div>
+            <select
+                id="categoryFilter"
+                onchange="filterByCategory()"
+            >
+                <option value="all">All Categories</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Drinks">Drinks</option>
+            </select>
 
         </div>
 
+
+        <!-- JavaScript displays all recipe cards here -->
+        <div
+            id="recipeResults"
+            class="recipe-container">
+        </div>
+
     </section>
+
+
+    <!-- Recipe Popup -->
+    <div id="recipeModal" class="modal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-button"
+                onclick="closeRecipe()">
+                ×
+            </button>
+
+            <div
+                id="modalEmoji"
+                class="modal-emoji">
+            </div>
+
+            <h2 id="modalTitle"></h2>
+
+            <p id="modalTime"></p>
+
+            <h3>🥕 Ingredients</h3>
+
+            <ul id="modalIngredients"></ul>
+
+            <h3>👩‍🍳 How to Prepare</h3>
+
+            <p id="modalSteps"></p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
 

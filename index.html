@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PantryPal</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">🍳 PantryPal</div>
 
@@ -22,10 +20,7 @@
         </div>
     </nav>
 
-
-    <!-- Hero Section -->
     <section class="hero">
-
         <div class="hero-content">
 
             <h1>What's in your kitchen?</h1>
@@ -37,86 +32,56 @@
 
             <div class="ingredient-box">
 
-        <input
-            type="text"
-            id="ingredientInput"
-            placeholder="Type an ingredient and press Enter..."
-        >
+                <input
+                    type="text"
+                    id="ingredientInput"
+                    placeholder="Type an ingredient..."
+                >
 
-        <button onclick="addIngredient()">
-         Add
-        </button>
+                <button onclick="addIngredient()">Add</button>
 
-        <button onclick="findRecipes()">
-            Find Recipes
-        </button>
+                <button onclick="findRecipes()">Find Recipes</button>
 
-</div>
+            </div>
 
-<div id="ingredientList" class="ingredient-list"></div>
-<button class="clear-button" onclick="clearIngredients()">
-    Clear All
-</button>
+            <div id="ingredientList" class="ingredient-list"></div>
+
+            <button class="clear-button" onclick="clearIngredients()">
+                Clear All
+            </button>
 
         </div>
+    </section>
+
+    <section class="recipes-section">
+
+        <h2 id="resultTitle">Popular Recipes</h2>
+
+        <div id="recipeResults" class="recipe-container"></div>
 
     </section>
 
+    <div id="recipeModal" class="modal">
 
-   <!-- Recipe Results -->
-<section class="recipes-section">
+        <div class="modal-content">
 
-    <h2 id="resultTitle">Popular Recipes</h2>
+            <button class="close-button" onclick="closeRecipe()">×</button>
 
-    <div id="recipeResults" class="recipe-container">
+            <div id="modalEmoji" class="modal-emoji"></div>
 
-        <div class="recipe-card">
-            <div class="food-image">🍝</div>
-            <h3>Tomato Pasta</h3>
-            <p>Easy • 20 mins</p>
-        </div>
+            <h2 id="modalTitle"></h2>
 
-        <div class="recipe-card">
-            <div class="food-image">🍳</div>
-            <h3>Egg Fried Rice</h3>
-            <p>Easy • 15 mins</p>
-        </div>
+            <p id="modalTime"></p>
 
-        <div class="recipe-card">
-            <div class="food-image">🥞</div>
-            <h3>Classic Pancakes</h3>
-            <p>Easy • 20 mins</p>
+            <h3>🥕 Ingredients</h3>
+            <ul id="modalIngredients"></ul>
+
+            <h3>👩‍🍳 How to Prepare</h3>
+            <p id="modalSteps"></p>
+
         </div>
 
     </div>
-
-</section>
-<!-- Recipe Popup -->
-<div id="recipeModal" class="modal">
-
-    <div class="modal-content">
-
-        <button class="close-button" onclick="closeRecipe()">
-            ×
-        </button>
-
-        <div id="modalEmoji" class="modal-emoji"></div>
-
-        <h2 id="modalTitle"></h2>
-
-        <p id="modalTime"></p>
-
-        <h3>🥕 Ingredients</h3>
-        <ul id="modalIngredients"></ul>
-
-        <h3>👩‍🍳 How to Prepare</h3>
-        <p id="modalSteps"></p>
-
-    </div>
-
-</div>
-           
-
 
     <script src="script.js"></script>
 
