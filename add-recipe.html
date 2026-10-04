@@ -1,0 +1,86 @@
+<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Recipe - PantryPal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">🍳 PantryPal</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="add-recipe.html">Add Recipe</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Add Recipe Section -->
+    <section class="add-recipe">
+
+        <h2>Add Your Recipe 🍴</h2>
+        <form onsubmit="addRecipe(event)">  
+
+            <label>Recipe Name</label>
+            <input type="text" placeholder="Enter recipe name">
+
+
+            <label>Ingredients</label>
+            <input type="text" placeholder="e.g. egg, rice, onion">
+
+
+            <label>Cooking Time</label>
+            <input type="text" placeholder="e.g. 20 mins">
+
+
+            <label>Category</label>
+
+            <select>
+                <option value="">Select category</option>
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+                <option>Snacks</option>
+                <option>Drinks</option>
+            </select>
+
+
+            <label>Preparation Steps</label>
+
+            <textarea
+                rows="5"
+                placeholder="Describe how to prepare the recipe..."
+            ></textarea>
+
+
+            <button type="submit">
+                Add Recipe
+            </button>
+
+        </form>
+
+    </section>
+    <script>
+    function addRecipe(event) {
+
+        event.preventDefault();
+        alert("✅ Recipe added successfully!");
+
+    }
+</script>
+
+</body>
+
+</html>
