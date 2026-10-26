@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - PantryPal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🍳 PantryPal</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="add-recipe.html">Add Recipe</a>
+        </div>
+    </nav>
+
+    <section class="add-recipe">
+        <h2>Create your account 🍴</h2>
+
+        <form data-endpoint="register.php" data-redirect="index.html">
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username"
+                   minlength="3" maxlength="30" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+
+            <label for="password">Password (at least 8 characters)</label>
+            <input type="password" id="password" name="password" autocomplete="new-password"
+                   minlength="8" required>
+
+            <label for="confirm">Confirm password</label>
+            <input type="password" id="confirm" name="confirm" autocomplete="new-password"
+                   minlength="8" required>
+
+            <p id="formMessage" class="auth-message" role="alert"></p>
+
+            <button type="submit">Create account</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+    </section>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>

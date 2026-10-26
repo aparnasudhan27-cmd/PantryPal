@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe - PantryPal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🍳 PantryPal</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="add-recipe.html">Add Recipe</a>
+        </div>
+    </nav>
+
+    <section class="add-recipe">
+        <h2>Edit your recipe ✏️</h2>
+
+        <form id="editForm" data-endpoint="update_recipe.php" data-redirect="my-recipes.html">
+
+            <input type="hidden" id="recipeId" name="id">
+
+            <label for="recipeName">Recipe Name</label>
+            <input type="text" id="recipeName" name="recipeName" required>
+
+            <label for="recipeIngredients">Ingredients (separate with commas)</label>
+            <input type="text" id="recipeIngredients" name="recipeIngredients" required>
+
+            <label for="cookingTime">Cooking Time</label>
+            <input type="text" id="cookingTime" name="cookingTime" placeholder="e.g. 20 mins" required>
+
+            <label for="recipeCategory">Category</label>
+            <select id="recipeCategory" name="recipeCategory" required>
+                <option value="">Select category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Drinks">Drinks</option>
+            </select>
+
+            <label for="recipeSteps">Preparation Steps</label>
+            <textarea id="recipeSteps" name="recipeSteps" rows="5" required></textarea>
+
+            <p id="formMessage" class="auth-message" role="alert"></p>
+
+            <button type="submit">Save changes</button>
+        </form>
+
+        <p class="auth-switch"><a href="my-recipes.html">Back to my recipes</a></p>
+    </section>
+
+    <script src="auth.js"></script>
+    <script>
+        async function loadRecipe() {
+            const message = document.getElementById("formMessage");
+            const id = new URLSearchParams(window.location.search).get("id");
+
+            if (!id) {
+                message.textContent = "No recipe selected.";
+                message.className = "auth-message error";
+                return;
+            }
+
+            try {
+                const response = await fetch("get_recipe.php?id=" + encodeURIComponent(id));
+
+                if (response.status === 401) {
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (!data.ok) {
+                    message.textContent = data.message;
+                    message.className = "auth-message error";
+                    document.querySelector("#editForm button[type=submit]").disabled = true;
+                    return;
+                }
+
+                const r = data.recipe;
+                document.getElementById("recipeId").value = r.id;
+                document.getElementById("recipeName").value = r.recipeName;
+                document.getElementById("recipeIngredients").value = r.ingredients;
+                document.getElementById("cookingTime").value = r.cookingTime;
+                document.getElementById("recipeCategory").value = r.category;
+                document.getElementById("recipeSteps").value = r.steps;
+            } catch (error) {
+                message.textContent = "Could not load the recipe. Please try again.";
+                message.className = "auth-message error";
+            }
+        }
+
+        loadRecipe();
+    </script>
+</body>
+
+</html>

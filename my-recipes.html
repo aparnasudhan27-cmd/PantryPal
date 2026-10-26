@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recipes - PantryPal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🍳 PantryPal</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="add-recipe.html">Add Recipe</a>
+        </div>
+    </nav>
+
+    <section class="recipes-section">
+        <h2>My Recipes 📖</h2>
+        <p id="myMessage" class="auth-message page-message" role="alert"></p>
+        <div id="myRecipes" class="recipe-container"></div>
+    </section>
+
+    <script src="auth.js"></script>
+    <script>
+        const container = document.getElementById("myRecipes");
+        const message = document.getElementById("myMessage");
+
+        function showError(text) {
+            message.textContent = text;
+            message.className = "auth-message page-message error";
+        }
+
+        function buildCard(recipe) {
+            const card = document.createElement("div");
+            card.className = "recipe-card";
+
+            const image = document.createElement("div");
+            image.className = "food-image";
+            image.textContent = "🍽️";
+
+            const name = document.createElement("h3");
+            name.textContent = recipe.name;
+
+            const time = document.createElement("p");
+            time.textContent = "⏱ " + recipe.time;
+
+            const category = document.createElement("span");
+            category.className = "category-badge";
+            category.textContent = recipe.category;
+
+            const actions = document.createElement("div");
+            actions.className = "card-actions";
+
+            const edit = document.createElement("a");
+            edit.className = "edit-button";
+            edit.href = "edit-recipe.html?id=" + recipe.id;
+            edit.textContent = "Edit recipe";
+
+            const del = document.createElement("button");
+            del.type = "button";
+            del.className = "delete-button";
+            del.textContent = "Delete recipe";
+            del.addEventListener("click", () => deleteRecipe(recipe, card));
+
+            actions.append(edit, del);
+            card.append(image, name, time, category, actions);
+            return card;
+        }
+
+        function showEmpty() {
+            container.innerHTML = "";
+            const empty = document.createElement("p");
+            empty.className = "no-results";
+            empty.append("You haven't added any recipes yet. ");
+            const link = document.createElement("a");
+            link.href = "add-recipe.html";
+            link.textContent = "Add your first recipe";
+            empty.append(link, ".");
+            container.appendChild(empty);
+        }
+
+        async function deleteRecipe(recipe, card) {
+            if (!confirm('Delete "' + recipe.name + '"? This cannot be undone.')) return;
+
+            const body = new FormData();
+            body.append("id", recipe.id);
+
+            try {
+                const response = await fetch("delete_recipe.php", { method: "POST", body });
+                const data = await response.json();
+
+                if (!data.ok) { showError(data.message); return; }
+
+                card.remove();
+                message.className = "auth-message page-message";
+                if (!container.querySelector(".recipe-card")) showEmpty();
+            } catch (error) {
+                showError("Could not reach the server. Please try again.");
+            }
+        }
+
+        async function loadMyRecipes() {
+            try {
+                const response = await fetch("get_my_recipes.php");
+
+                if (response.status === 401) {
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const data = await response.json();
+                if (!data.ok) { showError(data.message); return; }
+
+                if (data.recipes.length === 0) { showEmpty(); return; }
+                data.recipes.forEach(recipe => container.appendChild(buildCard(recipe)));
+            } catch (error) {
+                showError("Could not load your recipes. Please try again.");
+            }
+        }
+
+        loadMyRecipes();
+    </script>
+</body>
+
+</html>

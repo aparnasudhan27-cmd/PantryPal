@@ -1,0 +1,126 @@
+/* =========================================
+   PantryPal - Member 4: login, My Recipes, admin
+   (loads after style.css and reuses its colours)
+========================================= */
+
+/* Messages under forms and pages */
+.auth-message {
+    min-height: 20px;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+.auth-message.error   { color: #c62828; }
+.auth-message.success { color: #2e7d32; }
+
+.page-message {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.auth-switch a,
+.no-results a {
+    color: #6a1b9a;
+    font-weight: 600;
+}
+
+/* Logout link in the nav */
+.nav-links a.nav-logout {
+    color: #6a1b9a;
+}
+
+/* Message shown on Add Recipe when logged out */
+.login-required {
+    text-align: center;
+    line-height: 1.8;
+    color: #555;
+}
+
+.login-required a {
+    color: #6a1b9a;
+    font-weight: 600;
+}
+
+/* Edit / Delete buttons on My Recipes cards */
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.edit-button,
+.delete-button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.edit-button {
+    background: #6a1b9a;
+    color: white;
+}
+
+.delete-button {
+    background: #fdecea;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    opacity: 0.85;
+}
+
+.edit-button:focus-visible,
+.delete-button:focus-visible {
+    outline: 3px solid #ce93d8;
+    outline-offset: 2px;
+}
+
+.delete-button.small {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+/* Admin tables */
+.admin-section h3 {
+    margin: 30px 0 12px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    background: #f3e5f5;
+    color: #4a148c;
+}

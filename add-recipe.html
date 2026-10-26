@@ -8,6 +8,7 @@
     <title>Add Recipe - PantryPal</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
 </head>
 
 <body>
@@ -31,7 +32,7 @@
 
         <h2>Add Your Recipe 🍴</h2>
 
-        <form onsubmit="submitRecipeForm(event)">
+        <form action="add_recipe.php" method="POST">
 
             <label for="recipeName">
                 Recipe Name
@@ -40,6 +41,7 @@
             <input
                 type="text"
                 id="recipeName"
+                name="recipeName"
                 placeholder="Enter recipe name"
                 required
             >
@@ -52,6 +54,7 @@
             <input
                 type="text"
                 id="recipeIngredients"
+                name="recipeIngredients"
                 placeholder="e.g. egg, rice, onion"
                 required
             >
@@ -64,6 +67,7 @@
             <input
                 type="text"
                 id="cookingTime"
+                name="cookingTime"
                 placeholder="e.g. 20 mins"
                 required
             >
@@ -73,7 +77,11 @@
                 Category
             </label>
 
-            <select id="recipeCategory" required>
+            <select
+                id="recipeCategory"
+                name="recipeCategory"
+                required
+            >
 
                 <option value="">
                     Select category
@@ -108,6 +116,7 @@
 
             <textarea
                 id="recipeSteps"
+                name="recipeSteps"
                 rows="5"
                 placeholder="Describe how to prepare the recipe..."
                 required
@@ -122,18 +131,7 @@
 
     </section>
 
-
-    <script>
-        function submitRecipeForm(event) {
-
-            event.preventDefault();
-
-            alert("✅ Recipe added successfully!");
-
-            event.target.reset();
-        }
-    </script>
-
+    <script src="auth.js"></script>
 </body>
 
 </html>
