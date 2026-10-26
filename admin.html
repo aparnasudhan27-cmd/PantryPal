@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - PantryPal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🍳 PantryPal</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="add-recipe.html">Add Recipe</a>
+        </div>
+    </nav>
+
+    <section class="recipes-section admin-section">
+        <h2>Admin Dashboard 🛠️</h2>
+        <p id="adminMessage" class="auth-message page-message" role="alert"></p>
+
+        <h3>Users</h3>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>Username</th><th>Email</th><th>Role</th><th>Recipes</th><th>Joined</th><th>Action</th></tr>
+                </thead>
+                <tbody id="userRows"></tbody>
+            </table>
+        </div>
+
+        <h3>All recipes</h3>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>Recipe</th><th>Category</th><th>Added by</th><th>Action</th></tr>
+                </thead>
+                <tbody id="recipeRows"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="auth.js"></script>
+    <script>
+        const message = document.getElementById("adminMessage");
+
+        function setMessage(text, isError) {
+            message.textContent = text;
+            message.className = "auth-message page-message" + (isError ? " error" : " success");
+        }
+
+        function cell(text) {
+            const td = document.createElement("td");
+            td.textContent = text;
+            return td;
+        }
+
+        function deleteButton(label, onClick) {
+            const td = document.createElement("td");
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "delete-button small";
+            button.textContent = label;
+            button.addEventListener("click", onClick);
+            td.appendChild(button);
+            return td;
+        }
+
+        async function post(url, id) {
+            const body = new FormData();
+            body.append("id", id);
+            const response = await fetch(url, { method: "POST", body });
+            return response.json();
+        }
+
+        async function removeRecipe(recipe) {
+            if (!confirm('Delete recipe "' + recipe.recipe_name + '"?')) return;
+            const data = await post("delete_recipe.php", recipe.id);
+            setMessage(data.message, !data.ok);
+            if (data.ok) loadAdmin();
+        }
+
+        async function removeUser(user) {
+            if (!confirm('Delete user "' + user.username + '"? Their recipes will stay on the site.')) return;
+            const data = await post("admin_delete_user.php", user.id);
+            setMessage(data.message, !data.ok);
+            if (data.ok) loadAdmin();
+        }
+
+        async function loadAdmin() {
+            try {
+                const response = await fetch("admin_data.php");
+
+                if (response.status === 401) { window.location.href = "login.html"; return; }
+
+                const data = await response.json();
+
+                if (!data.ok) {
+                    setMessage(data.message, true);
+                    return;
+                }
+
+                const userRows = document.getElementById("userRows");
+                const recipeRows = document.getElementById("recipeRows");
+                userRows.innerHTML = "";
+                recipeRows.innerHTML = "";
+
+                data.users.forEach(user => {
+                    const tr = document.createElement("tr");
+                    tr.append(
+                        cell(user.username), cell(user.email), cell(user.role),
+                        cell(user.recipe_count), cell(user.created_at.slice(0, 10))
+                    );
+                    if (user.id === data.me) {
+                        tr.appendChild(cell("(you)"));
+                    } else {
+                        tr.appendChild(deleteButton("Delete user", () => removeUser(user)));
+                    }
+                    userRows.appendChild(tr);
+                });
+
+                data.recipes.forEach(recipe => {
+                    const tr = document.createElement("tr");
+                    tr.append(cell(recipe.recipe_name), cell(recipe.category), cell(recipe.owner || "(sample / removed user)"));
+                    tr.appendChild(deleteButton("Delete recipe", () => removeRecipe(recipe)));
+                    recipeRows.appendChild(tr);
+                });
+            } catch (error) {
+                setMessage("Could not load admin data. Please try again.", true);
+            }
+        }
+
+        loadAdmin();
+    </script>
+</body>
+
+</html>

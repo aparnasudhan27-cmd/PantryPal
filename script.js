@@ -4,7 +4,7 @@
 
 let selectedIngredients = [];
 
-const recipes = [
+let recipes = [
     {
         name: "Egg Fried Rice",
         ingredients: ["egg", "rice", "onion"],
@@ -361,18 +361,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+const recipeResults = document.getElementById("recipeResults");
 
-    const recipeResults = document.getElementById("recipeResults");
-
-    if (recipeResults) {
-        displayRecipes(
-            recipes.map((recipe, index) => ({
-                ...recipe,
-                originalIndex: index
-            }))
-        );
-    }
-
+if (recipeResults && !document.getElementById("recipeSearch")) {
+    displayRecipes(
+        recipes.map((recipe, index) => ({
+            ...recipe,
+            originalIndex: index
+        }))
+    );
+}
+    
     const modal = document.getElementById("recipeModal");
 
     if (modal) {
@@ -383,3 +382,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+/* ---------- Load Recipes from Database ---------- */
+
+async function loadDatabaseRecipes() {
+    try {
+        const response = await fetch("get_recipes.php");
+
+        if (!response.ok) {
+            throw new Error("Could not fetch recipes");
+        }
+
+        const databaseRecipes = await response.json();
+
+        const existingNames = new Set(
+            recipes.map(recipe => recipe.name.toLowerCase())
+        );
+
+        databaseRecipes.forEach(recipe => {
+            if (!existingNames.has(recipe.name.toLowerCase())) {
+                recipe.ingredients = recipe.ingredients.map(
+                    ingredient => ingredient.trim().toLowerCase()
+                );
+
+                recipe.time = recipe.time || "0 mins";
+                recipe.emoji = recipe.emoji || "🍽️";
+
+                recipes.push(recipe);
+                existingNames.add(recipe.name.toLowerCase());
+            }
+        });
+
+        // Refresh recipe cards on the current page
+        if (document.getElementById("recipeSearch")) {
+            updateRecipeList();
+        } else if (document.getElementById("recipeResults")) {
+            displayRecipes(
+                recipes.map((recipe, index) => ({
+                    ...recipe,
+                    originalIndex: index
+                }))
+            );
+        }
+
+    } catch (error) {
+        console.error("Recipe loading error:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadDatabaseRecipes);
